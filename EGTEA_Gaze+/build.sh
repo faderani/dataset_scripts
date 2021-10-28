@@ -23,4 +23,4 @@ tar -xf $VIDEO_CLIPS -C $DESTDIR
 unzip $HANDS_OBJS -d $DESTDIR
 rm $VIDEO_CLIPS
 rm $HANDS_OBJS
-#python3 main.py --datadir $DESTDIR/cropped_clips --outputdir $DESTDIR/frames
+#python3 vid_to_img.py --datadir $DESTDIR/cropped_clips --outputdir $DESTDIR/frames
