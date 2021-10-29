@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DESTDIR=/ssd2/datasets1
+DESTDIR=/home/datasets1
 
 
 VIDEO_CLIPS=$DESTDIR/video_clips.tar
@@ -21,6 +21,7 @@ fi
 
 tar -xf $VIDEO_CLIPS -C $DESTDIR
 unzip $HANDS_OBJS -d $DESTDIR
-rm $VIDEO_CLIPS
-rm $HANDS_OBJS
-#python3 vid_to_img.py --datadir $DESTDIR/cropped_clips --outputdir $DESTDIR/frames
+
+
+python3.8 vid_to_img.py --datadir $DESTDIR/cropped_clips --outputdir $DESTDIR/frames
+python3.8 obfuscator.py --datadir $DESTDIR/frames --maskdir $DESTDIR/hand_plus_object_npy --outputdir $DESTDIR/hand_obj_obfuscated
