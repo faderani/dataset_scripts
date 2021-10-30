@@ -1,12 +1,11 @@
 #!/bin/bash
 
-DESTDIR=./
-DESTPATH= ./kinetics400/SLOWFAST_8x8_R50.pkl
+DESTDLPATH= ./kinetics400/SLOWFAST_8x8_R50.pkl
 
 
-if [ -f "$DESTPATH" ]; then
-    echo "$DESTPATH exists."
+if [ -f "$DESTDLPATH" ]; then
+    echo "$DESTDLPATH exists."
 else
-    curl https://dl.fbaipublicfiles.com/pyslowfast/model_zoo/kinetics400/SLOWFAST_8x8_R50.pkl --create-dirs -o $DESTPATH
+    curl https://dl.fbaipublicfiles.com/pyslowfast/model_zoo/kinetics400/SLOWFAST_8x8_R50.pkl --create-dirs -o ./kinetics400/SLOWFAST_8x8_R50.pkl
 fi
 
