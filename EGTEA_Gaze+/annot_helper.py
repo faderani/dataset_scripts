@@ -4,16 +4,16 @@ import os
 parser = argparse.ArgumentParser(description='Preparing annotations for EGTEA Gaze+ datasets. Converts annotations formats making it readable by slowfast dataloader and removes non hand held object classes')
 
 
-parser.add_argument('--split_path', default='./trainsplit.txt', help='path to the original train split text file', required=True)
+parser.add_argument('--splitpath', default='./trainsplit.txt', help='path to the original train split text file', required=True)
 parser.add_argument('--datasetroot', default='./frames', help='path to the dataset root', required=True)
-parser.add_argument('--outputdir', default='./output', help='path to output dir', required=False)
+parser.add_argument('--outputpath', default='./output.csv', help='path to output csv file', required=False)
 
 
 
 
-def convert(txt_path, dataset_root, out_path)
+def convert(txt_path, dataset_root, out_path):
 
-    out_path = os.path.join(out_path, txt_path.split("/")[-1].split(".")[0] + ".csv")
+    #out_path = os.path.join(out_path, txt_path.split("/")[-1].split(".")[0] + ".csv")
 
     with open(txt_path, "r") as split:
         lines = split.readlines()
@@ -36,4 +36,4 @@ def convert(txt_path, dataset_root, out_path)
 if __name__ == '__main__':
     args = parser.parse_args()
 
-    convert(args.splitpath, args.datasetroot, args.outputdir)
+    convert(args.splitpath, args.datasetroot, args.outputpath)
