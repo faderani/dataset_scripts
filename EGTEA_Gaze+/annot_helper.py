@@ -32,7 +32,7 @@ def create_new_action_idx(actionidxpath, ignore, outputdir):
                             flg = False
                             break
                     if flg:
-                        new_action_idx.write(" ".join(line1.split(" ")[0:-1]) + " " + cnt + "\n")
+                        new_action_idx.write(" ".join(line1.split(" ")[0:-1]) + " " + str(cnt) + "\n")
                         cnt+=1
 
 def get_ignore_idx(ignore):
@@ -54,6 +54,9 @@ def convert(txt_path, ignore_path, dataset_root, out_dir):
     action_idx_path = os.path.join(out_dir, "action_idx.txt")
 
     cnt = 1
+    old_idx = 0
+    new_idx = 0
+    vid_id = -1
 
     with open(txt_path, "r") as split:
         lines = split.readlines()
@@ -62,20 +65,37 @@ def convert(txt_path, ignore_path, dataset_root, out_dir):
             modified_split.write("original_vido_id video_id frame_id path labels\n")
 
             for idx1, line in enumerate(lines):
+
                 line = line.strip("\n")
                 arr = line.split(" ")
                 sub_dir_name, action_idx = arr[0], arr[1]
                 dir_name = "-".join(sub_dir_name.split("-")[0:3])
+
+                if int(action_idx) < int(old_idx):    
+                    cnt = 1
+                    old_idx = 0
+                    new_idx = 0
+
                 if action_idx in ignore_indices:
                     continue
+                vid_id +=1
+                new_idx = action_idx    
+                if old_idx == 0:
+                    old_idx = new_idx
+                if old_idx != new_idx:
+                    cnt+=1
+
+                old_idx = new_idx
+                
                 jpgs = os.listdir(os.path.join(dataset_root, dir_name, sub_dir_name))
                 for idx2 in range(1, len(jpgs) + 1):
-                    s = sub_dir_name + " " + str(idx1) + " " + str(
+                    s = sub_dir_name + " " + str(vid_id) + " " + str(
                         idx2 - 1) + " " + dir_name + "/" + sub_dir_name + "/" + f"{idx2}.jpg" + " " + f"\"{cnt}\"" + "\n"
                     modified_split.write(s)
-                cnt+=1
+                
 
 if __name__ == '__main__':
     args = parser.parse_args()
 
-    convert(args.splitpath, args.datasetroot, args.outputdir)
+    create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
+    convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
