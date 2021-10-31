@@ -1,0 +1,16 @@
+Inspect/Read recipe 1
+Open fridge 2
+Turn on faucet 5
+Open cabinet 7
+Operate stove 10
+Close fridge 11
+Open drawer 15
+Turn off faucet 28
+Close cabinet 34
+Open fridge_drawer 38
+Clean/Wipe counter 46
+Open dishwasher 58
+Close drawer 78
+Pour water,faucet,pot 87
+Operate microwave 97
+Close fridge_drawer 98
