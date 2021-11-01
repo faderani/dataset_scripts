@@ -183,3 +183,4 @@ if __name__ == '__main__':
     else:
         create_new_nounverb_idx(args.outputdir)
         create_mapper(args.outputdir, mode="noun")
+        create_mapper(args.outputdir, mode="verb")
