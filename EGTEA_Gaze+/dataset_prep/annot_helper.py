@@ -174,6 +174,9 @@ def convert(txt_path, ignore_path, dataset_root, out_dir):
 if __name__ == '__main__':
     args = parser.parse_args()
 
+    if os.path.exists(args.outputdir) == False:
+        os.makedirs(args.outputdir)
+
     if args.task == 'convert':
         create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
         convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
