@@ -1,16 +1,59 @@
 import argparse
 import os
+import json
 
 parser = argparse.ArgumentParser(description='Preparing annotations for EGTEA Gaze+ datasets. Converts annotations formats making it readable by slowfast dataloader and removes non hand held object classes')
 
 
 parser.add_argument('--splitpath', default='./trainsplit.txt', help='path to the original train split text file', required=True)
 parser.add_argument('--datasetroot', default='./frames', help='path to the dataset root', required=True)
+parser.add_argument('--task', default='convert', help='convert/newidx', required=True)
 parser.add_argument('--outputdir', default='./output', help='path to output dir', required=False)
 parser.add_argument('--actionidxpath', default='./splits/action_idx.txt', help='path to action idx file', required=False)
 parser.add_argument('--ignore', default='./splits/ignore_idx.txt', help='path to ignore file', required=False)
 
 
+
+def create_mapper(outputdir, mode="verb"):
+    mode_path = os.path.join(outputdir, f"reduced_{mode}_idx.txt")
+    actionidxpath = os.path.join(outputdir, "reduced_action_idx.txt")
+    out_path = os.path.join(outputdir, f'mapping_{mode}.json')
+
+    actions = {}
+    action_idx = {}
+    with open(mode_path) as file:
+        lines = file.readlines()
+        for line in lines:
+            line = line.strip("\n")
+            f = " ".join(line.split(" ")[:-1])
+            s = line.split(" ")[-1]
+            actions[f] = int(s)
+
+    with open(actionidxpath) as file:
+        lines = file.readlines()
+        for line in lines:
+            line = line.strip("\n")
+            f = " ".join(line.split(" ")[:-1])
+            s = line.split(" ")[-1]
+            action_idx[f] = int(s)
+
+    mapping = {}
+
+    if "verb" in mode:
+        for key1, value1 in action_idx.items():
+            for key2, value2 in actions.items():
+                new_key1 = " ".join(key1.split(" ")[0:-1])
+                if new_key1 == key2:
+                    mapping[str(value1)] = value2
+    else:
+        for key1, value1 in action_idx.items():
+            for key2, value2 in actions.items():
+                new_key1 = key1.split(" ")[-1]
+                if new_key1 == key2:
+                    mapping[str(value1)] = value2
+
+    with open(out_path, "w") as json_file:
+        json.dump(mapping, json_file)
 
 def create_new_nounverb_idx(outputdir):
     actionidxpath = os.path.join(outputdir, "reduced_action_idx.txt")
@@ -131,6 +174,9 @@ def convert(txt_path, ignore_path, dataset_root, out_dir):
 if __name__ == '__main__':
     args = parser.parse_args()
 
-    create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
-    #convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
-    create_new_nounverb_idx(args.outputdir)
+    if args.task == 'convert':
+        create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
+        convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
+    else:
+        create_new_nounverb_idx(args.outputdir)
+        create_mapper(args.outputdir, mode="noun")
