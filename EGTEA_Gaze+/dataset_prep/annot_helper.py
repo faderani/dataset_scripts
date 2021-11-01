@@ -92,9 +92,9 @@ def create_new_nounverb_idx(outputdir):
                         cnt_v+=1
                         verb_stack.append(verb)
 
-    with open(outputpathjson_n) as json_file:
+    with open(outputpathjson_n, "w") as json_file:
         json.dump(json_out_n, json_file)
-    with open(outputpathjson_v) as json_file:
+    with open(outputpathjson_v, "w") as json_file:
         json.dump(json_out_v, json_file)
 
 
@@ -124,7 +124,7 @@ def create_new_action_idx(actionidxpath, ignore, outputdir):
                         new_action_idx.write(" ".join(line1.split(" ")[0:-1]) + " " + str(cnt) + "\n")
                         json_out[" ".join(line1.split(" ")[0:-1])] = cnt
                         cnt+=1
-    with open(outputpathjson) as json_file:
+    with open(outputpathjson, "w") as json_file:
         json.dump(json_out, json_file)
 
 
