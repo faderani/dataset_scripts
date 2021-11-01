@@ -60,6 +60,11 @@ def create_new_nounverb_idx(outputdir):
     nounoutputpath = os.path.join(outputdir, "reduced_noun_idx.txt")
     verboutputpath = os.path.join(outputdir, "reduced_verb_idx.txt")
 
+    outputpathjson_n = os.path.join(outputdir, "reduced_noun_idx.json")
+    outputpathjson_v = os.path.join(outputdir, "reduced_verb_idx.json")
+    json_out_n = {}
+    json_out_v = {}
+
     noun_stack = []
     verb_stack = []
 
@@ -78,20 +83,27 @@ def create_new_nounverb_idx(outputdir):
 
                     if noun not in noun_stack:
                         new_noun_idx.write(f"{noun} {cnt_n}\n")
+                        json_out_n[noun] = cnt_n
                         cnt_n+=1
                         noun_stack.append(noun)
                     if verb not in verb_stack:
                         new_verb_idx.write(f"{verb} {cnt_v}\n")
+                        json_out_v[verb] = cnt_n
                         cnt_v+=1
                         verb_stack.append(verb)
 
-
+    with open(outputpathjson_n) as json_file:
+        json.dump(json_out_n, json_file)
+    with open(outputpathjson_v) as json_file:
+        json.dump(json_out_v, json_file)
 
 
 
 def create_new_action_idx(actionidxpath, ignore, outputdir):
 
     outputpath = os.path.join(outputdir, "reduced_action_idx.txt")
+    outputpathjson = os.path.join(outputdir, "reduced_action_idx.json")
+    json_out = {}
     cnt = 1
     with open(outputpath, "w") as new_action_idx:
         with open(actionidxpath, "r") as old_action_idx:
@@ -110,7 +122,11 @@ def create_new_action_idx(actionidxpath, ignore, outputdir):
                             break
                     if flg:
                         new_action_idx.write(" ".join(line1.split(" ")[0:-1]) + " " + str(cnt) + "\n")
+                        json_out[" ".join(line1.split(" ")[0:-1])] = cnt
                         cnt+=1
+    with open(outputpathjson) as json_file:
+        json.dump(json_out, json_file)
+
 
 def get_ignore_idx(ignore):
     indices = []
