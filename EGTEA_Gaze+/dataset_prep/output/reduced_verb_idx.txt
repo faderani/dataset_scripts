@@ -1,0 +1,14 @@
+Take 1
+Cut 2
+Put 3
+Move Around 4
+Open 5
+Wash 6
+Spread 7
+Close 8
+Divide/Pull Apart 9
+Mix 10
+Pour 11
+Compress 12
+Crack 13
+Squeeze 14

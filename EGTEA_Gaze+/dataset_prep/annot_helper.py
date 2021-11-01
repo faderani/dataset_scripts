@@ -7,14 +7,48 @@ parser = argparse.ArgumentParser(description='Preparing annotations for EGTEA Ga
 parser.add_argument('--splitpath', default='./trainsplit.txt', help='path to the original train split text file', required=True)
 parser.add_argument('--datasetroot', default='./frames', help='path to the dataset root', required=True)
 parser.add_argument('--outputdir', default='./output', help='path to output dir', required=False)
-parser.add_argument('--actionidxpath', default='./action_idx.txt', help='path to action idx file', required=False)
-parser.add_argument('--ignore', default='./ignore.txt', help='path to output dir', required=False)
+parser.add_argument('--actionidxpath', default='./splits/action_idx.txt', help='path to action idx file', required=False)
+parser.add_argument('--ignore', default='./splits/ignore_idx.txt', help='path to ignore file', required=False)
+
+
+
+def create_new_nounverb_idx(outputdir):
+    actionidxpath = os.path.join(outputdir, "reduced_action_idx.txt")
+    nounoutputpath = os.path.join(outputdir, "reduced_noun_idx.txt")
+    verboutputpath = os.path.join(outputdir, "reduced_verb_idx.txt")
+
+    noun_stack = []
+    verb_stack = []
+
+    cnt_n = 1
+    cnt_v = 1
+
+    with open(nounoutputpath, "w") as new_noun_idx:
+        with open(verboutputpath, "w") as new_verb_idx:
+            with open(actionidxpath, "r") as action_idx:
+                lines = action_idx.readlines()
+                for line in lines:
+                    line = line.strip("/n")
+
+                    noun = line.split(" ")[-2]
+                    verb = " ".join(line.split(" ")[:-2])
+
+                    if noun not in noun_stack:
+                        new_noun_idx.write(f"{noun} {cnt_n}\n")
+                        cnt_n+=1
+                        noun_stack.append(noun)
+                    if verb not in verb_stack:
+                        new_verb_idx.write(f"{verb} {cnt_v}\n")
+                        cnt_v+=1
+                        verb_stack.append(verb)
+
+
 
 
 
 def create_new_action_idx(actionidxpath, ignore, outputdir):
 
-    outputpath = os.path.join(outputdir, "action_idx.txt")
+    outputpath = os.path.join(outputdir, "reduced_action_idx.txt")
     cnt = 1
     with open(outputpath, "w") as new_action_idx:
         with open(actionidxpath, "r") as old_action_idx:
@@ -98,4 +132,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
-    convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
+    #convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
+    create_new_nounverb_idx(args.outputdir)
