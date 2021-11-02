@@ -197,6 +197,7 @@ if __name__ == '__main__':
         create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
         convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
     else:
+        create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
         create_new_nounverb_idx(args.outputdir)
         create_mapper(args.outputdir, mode="noun")
         create_mapper(args.outputdir, mode="verb")

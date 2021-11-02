@@ -15,14 +15,14 @@ parser = argparse.ArgumentParser(description='Draws confusion matrices')
 parser.add_argument('--pkpath', default='../SlowFast/outputs/sample.pickle', help='path to the prediction pickle file', required=True)
 parser.add_argument('--outputdir', default='./output', help='path to the save dir', required=True)
 parser.add_argument('--mode', default='total', help='total/noun/verb', required=False)
-parser.add_argument('--annotpath', default='../../dataset_prep/output', help='path to annotaion dir', required=False)
+parser.add_argument('--annotdir', default='../../dataset_prep/output', help='path to annotaion dir', required=False)
 
 
 
 def read_annots(dir):
     names_action_path = os.path.join(dir, "reduced_action_idx.json")
-    nouns_action_path = os.path.join(dir, "reduced_nouns_idx.json")
-    verbs_action_path = os.path.join(dir, "reduced_verbs_idx.json")
+    nouns_action_path = os.path.join(dir, "reduced_noun_idx.json")
+    verbs_action_path = os.path.join(dir, "reduced_verb_idx.json")
 
     with open(names_action_path) as json_file:
         names_action = json.load(json_file)
@@ -51,13 +51,13 @@ def get_cm(dir, labels, preds, mode="total", normalize=None):
     verb_mapper_path = os.path.join(dir, "mapping_verb.json")
     noun_mapper_path = os.path.join(dir, "mapping_noun.json")
 
-    if "verbs" in mode:
+    if "verb" in mode:
         with open(verb_mapper_path) as json_file:
             v_map = json.load(json_file)
             for key, value in v_map.items():
                 preds = np.where(preds == int(key), value, preds)
                 labels = np.where(labels == int(key), value, labels)
-    elif "nouns" in mode:
+    elif "noun" in mode:
         with open(noun_mapper_path) as json_file:
             n_map = json.load(json_file)
             for key, value in n_map.items():
@@ -110,9 +110,9 @@ if __name__ == '__main__':
 
     if args.mode == "total":
         class_names = names_action
-    elif args.mode == "nouns":
+    elif args.mode == "noun":
         class_names = nouns_action
-    elif args.mode == "verbs":
+    elif args.mode == "verb":
         class_names = verbs_action
 
     with open(args.pkpath, 'rb') as f:
@@ -122,10 +122,10 @@ if __name__ == '__main__':
 
 
 
-    confusion_matrix = get_cm(labels, preds, mode=args.mode, normalize="true")
+    confusion_matrix = get_cm(args.annotdir, labels, preds, mode=args.mode, normalize="true")
     plot_cm(confusion_matrix,args.outputdir, class_names, args.mode)
 
-    mean_class_acc, acc = get_accuracy(get_cm(labels, preds, mode=args.mode, normalize=None))
+    mean_class_acc, acc = get_accuracy(get_cm(args.annotdir, labels, preds, mode=args.mode, normalize=None))
     print('mean acc: %.2f, acc: %.2f' % (mean_class_acc, acc))
 
 
