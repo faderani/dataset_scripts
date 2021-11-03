@@ -12,79 +12,75 @@ Put bowl 11
 Put trash,trash_container 12
 Put plate 13
 Cut bell_pepper 14
-Put cooking_utensil 15
-Take paper_towel 16
-Move Around bacon 17
-Open condiment_container 18
-Wash eating_utensil 19
-Spread condiment,bread,eating_utensil 20
-Put pan 21
-Take cooking_utensil 22
-Put lettuce 23
-Move Around patty 24
-Put pot 25
-Put bread 26
-Take bread 27
-Close condiment_container 28
-Wash hand 29
-Put tomato 30
-Take seasoning_container 31
-Take cup 32
-Divide/Pull Apart lettuce 33
-Put cup 34
-Take pot 35
-Take bread_container 36
-Take tomato 37
-Take pan 38
-Move Around pan 39
-Wash cutting_board 40
-Put bread_container 41
-Take sponge 42
-Take lettuce 43
-Take onion 44
-Put sponge 45
-Divide/Pull Apart paper_towel 46
-Take cheese_container 47
-Take oil_container 48
-Put seasoning_container 49
-Take cucumber 50
-Wash pan 51
-Take bell_pepper 52
-Divide/Pull Apart onion 53
-Put cutting_board 54
-Mix mixture,eating_utensil 55
-Take tomato_container 56
-Put cheese 57
-Move Around eating_utensil 58
-Put bell_pepper 59
-Pour oil,oil_container,pan 60
-Take pasta_container 61
-Cut lettuce 62
-Put tomato_container 63
-Wash bowl 64
-Cut olive 65
-Pour condiment,condiment_container,salad 66
-Wash pot 67
-Mix pasta 68
-Open bread_container 69
-Take grocery_bag 70
-Take cheese 71
-Pour seasoning,seasoning_container,salad 72
-Mix egg 73
-Put paper_towel 74
-Put cucumber 75
-Compress sandwich 76
-Put cheese_container 77
-Put onion 78
-Crack egg 79
-Take cutting_board 80
-Open oil_container 81
-Squeeze washing_liquid,sponge 82
-Wash strainer 83
-Move Around bowl 84
-Move Around pot 85
-Put grocery_bag 86
-Take egg 87
-Open cheese_container 88
-Close oil_container 89
-Put oil_container 90
+Take paper_towel 15
+Move Around bacon 16
+Open condiment_container 17
+Wash eating_utensil 18
+Spread condiment,bread,eating_utensil 19
+Put pan 20
+Put lettuce 21
+Move Around patty 22
+Put pot 23
+Put bread 24
+Take bread 25
+Close condiment_container 26
+Wash hand 27
+Put tomato 28
+Take seasoning_container 29
+Take cup 30
+Divide/Pull Apart lettuce 31
+Put cup 32
+Take pot 33
+Take bread_container 34
+Take tomato 35
+Take pan 36
+Move Around pan 37
+Wash cutting_board 38
+Put bread_container 39
+Take sponge 40
+Take lettuce 41
+Take onion 42
+Put sponge 43
+Divide/Pull Apart paper_towel 44
+Take cheese_container 45
+Take oil_container 46
+Put seasoning_container 47
+Take cucumber 48
+Wash pan 49
+Take bell_pepper 50
+Divide/Pull Apart onion 51
+Put cutting_board 52
+Mix mixture,eating_utensil 53
+Take tomato_container 54
+Put cheese 55
+Move Around eating_utensil 56
+Put bell_pepper 57
+Pour oil,oil_container,pan 58
+Take pasta_container 59
+Cut lettuce 60
+Put tomato_container 61
+Wash bowl 62
+Cut olive 63
+Pour condiment,condiment_container,salad 64
+Wash pot 65
+Open bread_container 66
+Take grocery_bag 67
+Take cheese 68
+Pour seasoning,seasoning_container,salad 69
+Put paper_towel 70
+Put cucumber 71
+Compress sandwich 72
+Put cheese_container 73
+Put onion 74
+Crack egg 75
+Take cutting_board 76
+Open oil_container 77
+Squeeze washing_liquid,sponge 78
+Wash strainer 79
+Move Around bowl 80
+Move Around pot 81
+Put grocery_bag 82
+Take egg 83
+Open cheese_container 84
+Close oil_container 85
+Put oil_container 86
