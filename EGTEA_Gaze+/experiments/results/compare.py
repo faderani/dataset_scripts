@@ -2,6 +2,7 @@ import pickle
 import numpy as np
 import argparse
 import os
+import json
 
 parser = argparse.ArgumentParser(description='Compares predictions and outputs to txt file')
 
@@ -30,7 +31,7 @@ def read_annots(dir):
 
     return names_action, nouns_action, verbs_action
 
-def compare_predictions(pkl_path1, pkl_path2, action_index):
+def compare_predictions(pkl_path1, pkl_path2, action_index, annot_dir):
     with open(pkl_path1, 'rb') as f:
         x = pickle.load(f)
     preds1 = np.argmax(x[0], axis=1).numpy()
@@ -45,8 +46,8 @@ def compare_predictions(pkl_path1, pkl_path2, action_index):
 
     sub_preds2 = preds2[labels_indices]
     sub_label2 = labels2[labels_indices]
-
-    with open("/ssd1/datasets/EGTEA_Gaze+/frames/val.csv", "r") as val:
+    csv_path = os.path.join(annot_dir, "test.csv")
+    with open(csv_path, "r") as val:
         lines = val.readlines()
         for idx, x in enumerate(sub_label1):
             for line in lines:
@@ -69,5 +70,5 @@ if __name__ == '__main__':
 
     names_action,_,_ = read_annots(args.annotdir)
 
-    compare_predictions(args.pkpth1, args.pkpth2,
-                        names_action.index("Close fridge") + 1)
+    compare_predictions(args.pkpath1, args.pkpath2,
+                        names_action.index(args.classname) + 1, args.annotdir)
