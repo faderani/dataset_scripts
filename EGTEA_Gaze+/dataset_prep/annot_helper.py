@@ -11,6 +11,7 @@ parser.add_argument('--task', default='convert', help='convert/newidx', required
 parser.add_argument('--outputdir', default='./output', help='path to output dir', required=False)
 parser.add_argument('--actionidxpath', default='./splits/action_idx.txt', help='path to action idx file', required=False)
 parser.add_argument('--ignore', default='./splits/ignore_idx.txt', help='path to ignore file', required=False)
+parser.add_argument('--merge', default='./splits/merge.json', help='path to merge file', required=False)
 
 
 
@@ -139,9 +140,15 @@ def get_ignore_idx(ignore):
 
     return indices
 
-def convert(txt_path, ignore_path, dataset_root, out_dir):
+def get_merge_dict(merge):
+    indices = []
+    with open(merge, "r") as json_file:
+        return json.load(json_file)
+
+def convert(txt_path, ignore_path, merge_path, dataset_root, out_dir):
 
     ignore_indices = get_ignore_idx(ignore_path)
+    merge_dict = get_merge_dict(merge_path)
 
     out_split_path = os.path.join(out_dir, txt_path.split("/")[-1].split(".")[0] + ".csv")
     action_idx_path = os.path.join(out_dir, "action_idx.txt")
@@ -170,6 +177,13 @@ def convert(txt_path, ignore_path, dataset_root, out_dir):
                     new_idx = 0
 
                 if action_idx in ignore_indices:
+                    if action_idx in merge_dict.keys():
+                        vid_id +=1
+                        jpgs = os.listdir(os.path.join(dataset_root, dir_name, sub_dir_name))
+                        for idx2 in range(1, len(jpgs) + 1):
+                            s = sub_dir_name + " " + str(vid_id) + " " + str(
+                                idx2 - 1) + " " + dir_name + "/" + sub_dir_name + "/" + f"{idx2}.jpg" + " " + f"\"{merge_dict[action_idx]}\"" + "\n"
+                            modified_split.write(s)
                     continue
                 vid_id +=1
                 new_idx = action_idx    
@@ -195,7 +209,7 @@ if __name__ == '__main__':
 
     if args.task == 'convert':
         create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
-        convert(args.splitpath, args.ignore ,args.datasetroot, args.outputdir)
+        convert(args.splitpath, args.ignore, args.merge ,args.datasetroot, args.outputdir)
     else:
         create_new_action_idx(args.actionidxpath, args.ignore, args.outputdir)
         create_new_nounverb_idx(args.outputdir)
