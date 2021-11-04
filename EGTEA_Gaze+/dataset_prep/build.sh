@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DESTDIR=/home/datasets1
+DESTDIR=/ssd2/datasets/EGTEA_Gaze++
 
 
 VIDEO_CLIPS=$DESTDIR/video_clips.tar

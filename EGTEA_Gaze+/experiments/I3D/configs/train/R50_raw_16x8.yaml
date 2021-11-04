@@ -5,7 +5,7 @@
 TRAIN:
   ENABLE: True
   DATASET: ptvcharades
-  BATCH_SIZE: 12
+  BATCH_SIZE: 24
   EVAL_PERIOD: 5
   CHECKPOINT_PERIOD: 5
   AUTO_RESUME: True
@@ -23,13 +23,9 @@ DATA:
   INV_UNIFORM_SAMPLE: True
   ENSEMBLE_METHOD: max
   REVERSE_INPUT_CHANNEL: True
-  PATH_PREFIX: /ssd2/datasets/EGTEA_Gaze+/frames
-  PATH_TO_DATA_DIR: /ssd2/datasets/EGTEA_Gaze+/frames
-SLOWFAST:
-  ALPHA: 4
-  BETA_INV: 8
-  FUSION_CONV_CHANNEL_RATIO: 2
-  FUSION_KERNEL_SZ: 7
+  PATH_PREFIX: /ssd2/datasets/EGTEA_Gaze++/frames
+  PATH_TO_DATA_DIR: /ssd2/datasets/EGTEA_Gaze++/frames
+
 RESNET:
   SPATIAL_STRIDES: [[1], [2], [2], [2]]
   SPATIAL_DILATIONS: [[1], [1], [1], [1]]
@@ -48,13 +44,13 @@ BN:
   USE_PRECISE_STATS: True
   NUM_BATCHES_PRECISE: 100
   NORM_TYPE: sync_batchnorm
-  NUM_SYNC_DEVICES: 2
+  NUM_SYNC_DEVICES: 3
 SOLVER:
   BASE_LR: 0.1
   LR_POLICY: steps_with_relative_lrs
   LRS: [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]
-  STEPS: [0, 30, 40, 50]
-  MAX_EPOCH: 60
+  STEPS: [0, 30, 40, 50, 60, 70]
+  MAX_EPOCH: 80
   MOMENTUM: 0.9
   WEIGHT_DECAY: 1e-4
   WARMUP_EPOCHS: 4.0
@@ -70,13 +66,14 @@ MODEL:
 TEST:
   ENABLE: True
   DATASET: ptvcharades
-  BATCH_SIZE: 8
+  BATCH_SIZE: 9
   NUM_ENSEMBLE_VIEWS: 10
   NUM_SPATIAL_CROPS: 3
+  SAVE_RESULTS_PATH: /home/soroush/Projects/dataset_scripts/EGTEA_Gaze+/experiments/I3D/outputs/R50_raw_16x8/predictions.pickle
 DATA_LOADER:
-  NUM_WORKERS: 28
+  NUM_WORKERS: 21
   PIN_MEMORY: True
-NUM_GPUS: 2
+NUM_GPUS: 3
 NUM_SHARDS: 1
 RNG_SEED: 0
 OUTPUT_DIR: /home/soroush/Projects/dataset_scripts/EGTEA_Gaze+/experiments/I3D/outputs/R50_raw_16x8
