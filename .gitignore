@@ -1,6 +1,7 @@
 *.pyth
 .DS_Store
-
+EGTEA_Gaze+/experiments/SlowFast/weights/
+EGTEA_Gaze+/experiments/I3D/weights/
 .idea/
 
 
