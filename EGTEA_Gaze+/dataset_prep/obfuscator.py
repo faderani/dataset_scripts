@@ -97,13 +97,13 @@ def run_obfuscation_hand_plus_object(jpg_paths, mask_paths, output_dir,dilation_
                 x2 = int(min(x2 + dilation_size / 2, img.shape[1]))
                 y2 = int(min(y2 + dilation_size / 2, img.shape[0]))
 
-                if (x2-x1)*(y2-y1)/37200 > 0.9:
-                    w = x2-x1
-                    h = y2-y1
-                    x1 = int(x1 + w / 4)
-                    y1 = int(y1 + h / 4)
-                    x2 = int(x2 - w / 4)
-                    y2 = int(y2 - h / 4)
+                # if (x2-x1)*(y2-y1)/37200 > 0.9:
+                #     w = x2-x1
+                #     h = y2-y1
+                #     x1 = int(x1 + w / 4)
+                #     y1 = int(y1 + h / 4)
+                #     x2 = int(x2 - w / 4)
+                #     y2 = int(y2 - h / 4)
 
 
                 obf_img[y1:y2, x1:x2] = img[y1:y2, x1:x2]

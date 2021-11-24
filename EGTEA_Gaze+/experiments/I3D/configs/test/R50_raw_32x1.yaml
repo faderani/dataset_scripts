@@ -10,6 +10,7 @@ TRAIN:
   CHECKPOINT_PERIOD: 5
   AUTO_RESUME: True
   CHECKPOINT_FILE_PATH: /home/soroush/Projects/dataset_scripts/EGTEA_Gaze+/experiments/I3D/outputs/R50_raw_32x1/checkpoints/checkpoint_epoch_00060.pyth
+  
 
 DATA:
   NUM_FRAMES: 32
@@ -22,8 +23,8 @@ DATA:
   INV_UNIFORM_SAMPLE: True
   ENSEMBLE_METHOD: max
   REVERSE_INPUT_CHANNEL: True
-  PATH_PREFIX: /data/datasets/EGTEA_Gaze+/frames
-  PATH_TO_DATA_DIR: /data/datasets/EGTEA_Gaze+/frames
+  PATH_PREFIX: /ssd2/datasets/EGTEA_Gaze++/frames
+  PATH_TO_DATA_DIR: /ssd2/datasets/EGTEA_Gaze++/frames
 
 RESNET:
   SPATIAL_STRIDES: [[1], [2], [2], [2]]

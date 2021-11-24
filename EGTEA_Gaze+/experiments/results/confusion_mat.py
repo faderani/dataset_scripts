@@ -16,6 +16,7 @@ parser.add_argument('--pkpath', default='../SlowFast/outputs/sample.pickle', hel
 parser.add_argument('--outputdir', default='./output', help='path to the save dir', required=True)
 parser.add_argument('--mode', default='total', help='total/noun/verb', required=False)
 parser.add_argument('--annotdir', default='../../dataset_prep/output', help='path to annotaion dir', required=False)
+parser.add_argument('--ignoretest', default='../../dataset_prep/splits/ignore_test.txt', help='path to ignoring idx at test time', required=False)
 
 
 

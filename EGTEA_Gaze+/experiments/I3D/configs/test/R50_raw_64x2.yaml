@@ -5,11 +5,12 @@
 TRAIN:
   ENABLE: False
   DATASET: ptvcharades
-  BATCH_SIZE: 6
+  BATCH_SIZE: 12
   EVAL_PERIOD: 5
   CHECKPOINT_PERIOD: 5
   AUTO_RESUME: True
   CHECKPOINT_FILE_PATH: /home/soroush/Projects/dataset_scripts/EGTEA_Gaze+/experiments/I3D/outputs/R50_raw_64x2/checkpoints/checkpoint_epoch_00060.pyth
+  
 
 DATA:
   NUM_FRAMES: 64
@@ -22,8 +23,8 @@ DATA:
   INV_UNIFORM_SAMPLE: True
   ENSEMBLE_METHOD: max
   REVERSE_INPUT_CHANNEL: True
-  PATH_PREFIX: /data/datasets/EGTEA_Gaze+/frames
-  PATH_TO_DATA_DIR: /data/datasets/EGTEA_Gaze+/frames
+  PATH_PREFIX: /ssd2/datasets/EGTEA_Gaze++/frames
+  PATH_TO_DATA_DIR: /ssd2/datasets/EGTEA_Gaze++/frames
 
 RESNET:
   SPATIAL_STRIDES: [[1], [2], [2], [2]]
@@ -65,7 +66,7 @@ MODEL:
 TEST:
   ENABLE: True
   DATASET: ptvcharades
-  BATCH_SIZE: 18
+  BATCH_SIZE: 9
   NUM_ENSEMBLE_VIEWS: 10
   NUM_SPATIAL_CROPS: 3
   SAVE_RESULTS_PATH: /home/soroush/Projects/dataset_scripts/EGTEA_Gaze+/experiments/I3D/outputs/R50_raw_64x2/test/predictions.pickle
